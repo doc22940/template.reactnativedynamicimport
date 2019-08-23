@@ -1,4 +1,5 @@
 import React, {Fragment} from 'react';
+
 import {
   SafeAreaView,
   Text,
@@ -13,8 +14,8 @@ class App extends React.Component {
   componentDidMount() { 
     if(someCondition) { 
       import('./dynamic-module').then(module => { 
-        module.reactNative().then(nativeValue => this.setState({ nativeValue }));
-        
+        module.reactNative().then(val => this.setState({ nativeValue: val[1] }));
+        // Following line generates warnings of no reference to localstorage
         // this.setState({ webValue: module.reactWeb() });
       })
     }

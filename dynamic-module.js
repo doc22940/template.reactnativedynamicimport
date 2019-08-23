@@ -7,6 +7,11 @@ export function reactWeb() {
 }
 
 export function reactNative() { 
-  AsyncStorage.setItem('native', 'React Native');
-  return AsyncStorage.getItem('native');
+  let setItem = AsyncStorage.setItem('native', 'React Native');
+  let getItem = AsyncStorage.getItem('native');
+
+  return Promise.all([
+    setItem,
+    getItem
+  ]);
 }
