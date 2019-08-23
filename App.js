@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 // Flip this bool!
-const someCondition = true;
+const someCondition = false;
 
 class App extends React.Component {
   state = { webValue: null, nativeValue: null }
@@ -14,9 +14,10 @@ class App extends React.Component {
   componentDidMount() { 
     if(someCondition) { 
       import('./dynamic-module').then(module => { 
+        // This should work fine in RN
         module.reactNative().then(val => this.setState({ nativeValue: val[1] }));
         // Following line generates warnings of no reference to localstorage
-        // this.setState({ webValue: module.reactWeb() });
+        this.setState({ webValue: module.reactWeb() });
       })
     }
   }
@@ -25,7 +26,6 @@ class App extends React.Component {
     return (
       <Fragment>
         <SafeAreaView>
-          <Text> Hey There! This is a sample app! </Text>
           <Text>webValue: { this.state.webValue || 'null' }</Text>
           <Text>nativeValue: { this.state.nativeValue || 'null' }</Text>
         </SafeAreaView>
